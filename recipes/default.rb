@@ -22,7 +22,6 @@
 include_recipe 'dsc::getdscresourcekit'
 
 include_dsc 'WindowsFeature'
-#include_dsc 'xWebAdministration'
 include_dsc 'xWebsite'
 
 dsc_windowsfeature 'iis' do
