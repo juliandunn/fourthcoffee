@@ -38,6 +38,7 @@ dsc_xwebsite 'DefaultSite' do
   dsc_name 'Default Web Site'
   dsc_ensure 'Present'
   dsc_state 'Stopped'
+  physicalpath 'c:\inetpub\wwwroot'
 end
 
 remote_directory node['fourthcoffee']['install_path'] do
