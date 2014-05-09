@@ -48,5 +48,5 @@ end
 dsc_xwebsite 'BakeryWebSite' do
   dsc_name 'FourthCoffee'
   dsc_ensure 'Started'
-  dsc_physicalpath node['fourthcoffee']['install_path']
+  physicalpath node['fourthcoffee']['install_path']
 end
