@@ -36,7 +36,8 @@ end
 
 dsc_xwebsite 'DefaultSite' do
   dsc_name 'Default Web Site'
-  dsc_ensure 'Stopped'
+  dsc_ensure 'Present'
+  dsc_state 'Stopped'
 end
 
 remote_directory node['fourthcoffee']['install_path'] do
@@ -47,6 +48,7 @@ end
 
 dsc_xwebsite 'BakeryWebSite' do
   dsc_name 'FourthCoffee'
-  dsc_ensure 'Started'
+  dsc_ensure 'Present'
+  dsc_state 'Started'
   physicalpath node['fourthcoffee']['install_path']
 end
