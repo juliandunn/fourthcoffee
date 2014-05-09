@@ -34,11 +34,7 @@ dsc_windowsfeature 'dotnet45' do
   dsc_ensure 'Present'
 end
 
-dsc_xwebsite 'DefaultSite' do
-  dsc_name 'Default Web Site'
-  dsc_ensure 'Present'
-  dsc_state 'Stopped'
-end
+include_recipe "iis::remove_default_site"
 
 remote_directory node['fourthcoffee']['install_path'] do
   source 'fourthcoffee'
@@ -46,9 +42,15 @@ remote_directory node['fourthcoffee']['install_path'] do
   action :create
 end
 
-dsc_xwebsite 'BakeryWebSite' do
-  dsc_name 'FourthCoffee'
-  dsc_ensure 'Present'
-  dsc_state 'Started'
-  physicalpath node['fourthcoffee']['install_path']
+iis_pool 'FourthCoffee' do
+  runtime_version "4.0"
+  action :add
+end
+
+iis_site 'FourthCoffee' do
+  protocol :http
+  port 80
+  path node['fourthcoffee']['install_path']
+  application_pool 'FourthCoffee'
+  action [:add,:start]
 end
