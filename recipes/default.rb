@@ -52,4 +52,6 @@ dsc_xwebsite 'BakeryWebSite' do
   dsc_ensure 'Present'
   dsc_state 'Started'
   physicalpath node['fourthcoffee']['install_path']
+  # XXX does not work due to not handling bindinginfo - how do we do that?
+  # see examples at http://gallery.technet.microsoft.com/scriptcenter/xWebAdministration-Module-3c8bb6be
 end
