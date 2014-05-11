@@ -17,12 +17,7 @@
 # limitations under the License.
 #
 
-# Install DSC Resource Kit, Wave 3
-# This gets us xWebsite, xWebAdministration, and so on
-include_recipe 'dsc::getdscresourcekit'
-
 include_dsc 'WindowsFeature'
-include_dsc 'xWebsite'
 
 dsc_windowsfeature 'iis' do
   dsc_name 'Web-Server'
@@ -34,12 +29,7 @@ dsc_windowsfeature 'dotnet45' do
   dsc_ensure 'Present'
 end
 
-dsc_xwebsite 'DefaultSite' do
-  dsc_name 'Default Web Site'
-  dsc_ensure 'Present'
-  dsc_state 'Stopped'
-  physicalpath 'c:\inetpub\wwwroot'
-end
+include_recipe "iis::remove_default_site"
 
 remote_directory node['fourthcoffee']['install_path'] do
   source 'fourthcoffee'
@@ -47,11 +37,15 @@ remote_directory node['fourthcoffee']['install_path'] do
   action :create
 end
 
-dsc_xwebsite 'BakeryWebSite' do
-  dsc_name 'FourthCoffee'
-  dsc_ensure 'Present'
-  dsc_state 'Started'
-  physicalpath node['fourthcoffee']['install_path']
-  # XXX does not work due to not handling bindinginfo - how do we do that?
-  # see examples at http://gallery.technet.microsoft.com/scriptcenter/xWebAdministration-Module-3c8bb6be
+iis_pool 'FourthCoffee' do
+  runtime_version "4.0"
+  action :add
+end
+
+iis_site 'FourthCoffee' do
+  protocol :http
+  port 80
+  path node['fourthcoffee']['install_path']
+  application_pool 'FourthCoffee'
+  action [:add,:start]
 end
