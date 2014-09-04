@@ -18,3 +18,6 @@
 #
 
 default['fourthcoffee']['install_path'] = 'C:\inetpub\FourthCoffee'
+
+# Which install method to use for windows features, _dsc based or _classic
+default['fourthcoffee']['install_method'] = '_dsc'

@@ -17,25 +17,14 @@
 # limitations under the License.
 #
 
-include_recipe "fourthcoffee::#{node['fourthcoffee']['install_method']}"
-
-include_recipe "iis::remove_default_site"
-
-remote_directory node['fourthcoffee']['install_path'] do
-  source 'fourthcoffee'
-  # might need rights here
-  action :create
+dsc_resource 'webserver' do
+  resource_name :windowsfeature
+  property :name, 'Web-Server'
+  property :ensure, 'Present'
 end
 
-iis_pool 'FourthCoffee' do
-  runtime_version "4.0"
-  action :add
-end
-
-iis_site 'FourthCoffee' do
-  protocol :http
-  port 80
-  path node['fourthcoffee']['install_path']
-  application_pool 'FourthCoffee'
-  action [:add,:start]
+dsc_resource 'dotnet45' do
+  resource_name :windowsfeature
+  property :name, 'Web-Asp-Net45'
+  property :ensure, 'Present'
 end
