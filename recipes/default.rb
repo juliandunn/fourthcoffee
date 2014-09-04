@@ -17,16 +17,16 @@
 # limitations under the License.
 #
 
-include_dsc 'WindowsFeature'
-
-dsc_windowsfeature 'iis' do
-  dsc_name 'Web-Server'
-  dsc_ensure 'Present'
+dsc_resource 'webserver' do
+  resource_name :windowsfeature
+  property :name, 'Web-Server'
+  property :ensure, 'Present'
 end
 
-dsc_windowsfeature 'dotnet45' do
-  dsc_name 'Web-Asp-Net45'
-  dsc_ensure 'Present'
+dsc_resource 'dotnet45' do
+  resource_name :windowsfeature
+  property :name, 'Web-Asp-Net45'
+  property :ensure, 'Present'
 end
 
 include_recipe "iis::remove_default_site"
