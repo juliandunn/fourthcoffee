@@ -16,6 +16,7 @@ This has only been test on:
 ### Cookbooks
 
 * dsc
+* iis
 * windows
 
 
