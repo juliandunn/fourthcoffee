@@ -17,25 +17,17 @@
 # limitations under the License.
 #
 
-include_recipe "fourthcoffee::#{node['fourthcoffee']['install_method']}"
-
-include_recipe "iis::remove_default_site"
-
-remote_directory node['fourthcoffee']['install_path'] do
-  source 'fourthcoffee'
-  # might need rights here
-  action :create
+windows_feature 'IIS-WebServerRole' do
+  action :install
 end
 
-iis_pool 'FourthCoffee' do
-  runtime_version "4.0"
-  action :add
+# Pre-requisite features for IIS-ASPNET45 that need to be installed first, in this order.
+%w{IIS-ISAPIFilter IIS-ISAPIExtensions NetFx3ServerFeatures NetFx4Extended-ASPNET45 IIS-NetFxExtensibility45}.each do |f|
+  windows_feature f do
+    action :install
+  end
 end
 
-iis_site 'FourthCoffee' do
-  protocol :http
-  port 80
-  path node['fourthcoffee']['install_path']
-  application_pool 'FourthCoffee'
-  action [:add,:start]
+windows_feature 'IIS-ASPNET45' do
+  action :install
 end

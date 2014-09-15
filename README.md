@@ -5,10 +5,40 @@ This cookbook is used as a demonstration with Microsoft Desired State Configurat
 
 Fourth Coffee: http://msdn.microsoft.com/en-us/library/hh478190.aspx
 
+Requirements
+------------
+
+### Platforms
+This has only been test on:
+
+* Windows 2012R2
+
+### Cookbooks
+
+* dsc
+* iis
+* windows
+
+
+Recipes
+-------
+
+default - Add this to your runlist to deploy the Fourth Coffee site. 
+ 
+
+Attributes
+----------
+
+* `node['fourthcoffee']['install_path']` - sets the install path for the Fourth Coffee Site. Default: `C:\inetpub\FourthCoffee`
+* `node['fourthcoffee']['install_method']` - sets the install method to use, `_dsc` for Desired State Configuration based resources or `_classic` for the `windows` cookbook based resources. Default: `_dsc`
+
+
+
 License and Authors
 -------------------
 
 * Author:: Julian C. Dunn (<jdunn@getchef.com>)
+* Author:: Michael Ducy (<michael@getchef.com>)
 * Copyright:: Copyright (c) 2014 Chef Software, Inc.
 * License:: Apache License, Version 2.0
 
