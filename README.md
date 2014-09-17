@@ -9,16 +9,14 @@ Requirements
 ------------
 
 ### Platforms
-This has only been test on:
 
-* Windows 2012R2
+This has only been tested on Windows Server 2012R2 as it is the only one that has a version of PowerShell 4.0 out-of-the-box.
 
 ### Cookbooks
 
 * dsc
 * iis
 * windows
-
 
 Recipes
 -------
