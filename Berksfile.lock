@@ -1,0 +1,16 @@
+DEPENDENCIES
+  fourthcoffee
+    path: .
+    metadata: true
+
+GRAPH
+  chef_handler (1.1.6)
+  dsc (0.1.0)
+  fourthcoffee (0.1.1)
+    dsc (>= 0.0.0)
+    iis (>= 0.0.0)
+    windows (>= 0.0.0)
+  iis (2.1.5)
+    windows (>= 1.2.6)
+  windows (1.34.6)
+    chef_handler (>= 0.0.0)
