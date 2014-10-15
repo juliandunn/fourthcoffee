@@ -1,4 +1,6 @@
 DEPENDENCIES
+  dsc
+    path: ../dsc
   fourthcoffee
     path: .
     metadata: true
