@@ -18,13 +18,13 @@
 #
 
 dsc_resource 'webserver' do
-  resource_name :windowsfeature
+  resource :windowsfeature
   property :name, 'Web-Server'
   property :ensure, 'Present'
 end
 
 dsc_resource 'dotnet45' do
-  resource_name :windowsfeature
+  resource :windowsfeature
   property :name, 'Web-Asp-Net45'
   property :ensure, 'Present'
 end
