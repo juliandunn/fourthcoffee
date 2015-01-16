@@ -1,5 +1,11 @@
 ---
-driver_plugin: vagrant
+driver:
+  forward_agent: yes
+  name: vagrant
+  vm_hostname: false # do not bother trying to change the hostname (sometimes fails)
+  customize:
+    cpus: 2
+    memory: 4096
 
 provisioner:
   name: chef_zero
