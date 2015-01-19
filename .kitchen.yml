@@ -24,3 +24,5 @@ suites:
   run_list:
     - 'recipe[fourthcoffee]'
   attributes:
+    fourthcoffee:
+      install_method: _classic
