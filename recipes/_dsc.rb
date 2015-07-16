@@ -17,14 +17,40 @@
 # limitations under the License.
 #
 
-dsc_resource 'webserver' do
-  resource :windowsfeature
-  property :name, 'Web-Server'
-  property :ensure, 'Present'
+#
+# Use the WindowsFeature DSC resource to install Web-Server and Web-Asp-Net45
+#
+
+dsc_script 'Web-Server' do
+  code <<-EOH
+  WindowsFeature InstallWebServer
+  {
+    Name = Web-Server
+    Ensure = Present
+  }
+  EOH
 end
 
-dsc_resource 'dotnet45' do
-  resource :windowsfeature
-  property :name, 'Web-Asp-Net45'
-  property :ensure, 'Present'
+dsc_script 'Web-Asp-Net45' do
+  code <<-EOH
+  WindowsFeature InstallDotNet45
+  {
+    Name = Web-Asp-Net45
+    Ensure = Present
+  }
+  EOH
 end
+
+# You can also use dsc_resource (requires PS5)
+
+# dsc_resource 'webserver' do
+#   resource :windowsfeature
+#   property :name, 'Web-Server'
+#   property :ensure, 'Present'
+# end
+
+# dsc_resource 'dotnet45' do
+#   resource :windowsfeature
+#   property :name, 'Web-Asp-Net45'
+#   property :ensure, 'Present'
+# end
