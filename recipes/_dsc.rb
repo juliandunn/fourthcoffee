@@ -41,6 +41,16 @@ dsc_script 'Web-Asp-Net45' do
   EOH
 end
 
+dsc_script 'Web-Mgmt-Console' do
+  code <<-EOH
+  WindowsFeature InstallIISConsole
+  {
+    Name = "Web-Mgmt-Console"
+    Ensure = "Present"
+  }
+  EOH
+end
+
 # You can also use dsc_resource (requires PS5)
 
 # dsc_resource 'webserver' do
